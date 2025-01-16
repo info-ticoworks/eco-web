@@ -1,0 +1,56 @@
+/* normal status */
+.services-link-svg path {
+  @apply transition-colors fill-eco-sky-blue;
+}
+
+/* hover status */
+.services-link:hover .services-link-svg path {
+  @apply fill-eco-blue--light;
+}
+
+.services-link:hover h5 {
+  @apply text-eco-blue--light;
+}
+
+/* active status */
+.services-link--active h5 {
+  @apply text-eco-green;
+}
+
+.services-link--active .services-link-svg {
+  @apply bg-eco-green rounded-full
+}
+
+.services-link--active .services-link-svg path {
+  @apply fill-white;
+}
+
+/* active and hover status */
+.services-link--active:hover .services-link-svg {
+  @apply bg-eco-blue--light
+}
+
+.services-link--active:hover .services-link-svg path {
+  @apply fill-white;
+}
+
+/* swiper navigation styles */
+.services .swiper .swiper-button-next,
+.services .swiper .swiper-button-prev {
+  @apply w-[36px] h-[36px] md:w-[48px] md:h-[48px] rounded-full px-1 text-white bg-eco-sky-blue flex items-center justify-center hover:bg-eco-blue--light transition-colors z-10 !important;
+  box-shadow: 4px 4px 4px 0px #00000040;
+}
+
+.services .swiper .swiper-button-next {
+  right: 4px;
+}
+
+.services .swiper .swiper-button-prev {
+  left: 4px;
+}
+
+.services .swiper .swiper-button-next::after,
+.services .swiper .swiper-button-prev::after {
+  @apply text-base md:text-lg !important;
+
+}

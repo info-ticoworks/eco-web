@@ -1,0 +1,33 @@
+.responsibility .swiper {
+  @apply pb-16;
+}
+
+.responsibility .swiper-slide {
+  @apply h-auto px-4;
+}
+
+.responsibility .swiper-pagination {
+  @apply bottom-8;
+}
+
+.responsibility .swiper-pagination-bullet {
+  @apply h-2 bg-transparent border border-white rounded opacity-100 cursor-pointer w-14;
+}
+
+.responsibility .swiper-pagination-bullet-active {
+  @apply bg-white;
+}
+
+.responsibility .responsibility-card--borders {
+  pointer-events: none;
+  border: 2px solid transparent;
+  border-image-source: linear-gradient(0deg, #2DABE3 2%, #48AE4D 100%);
+  border-image-slice: 2;
+  border-radius: inherit;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+}

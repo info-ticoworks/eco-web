@@ -1,0 +1,57 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import '@fontsource/raleway/100.css';
+/* Thin */
+@import '@fontsource/raleway/200.css';
+/* Extra Light */
+@import '@fontsource/raleway/300.css';
+/* Light */
+@import '@fontsource/raleway/400.css';
+/* Regular */
+@import '@fontsource/raleway/500.css';
+/* Medium */
+@import '@fontsource/raleway/600.css';
+/* Semi Bold */
+@import '@fontsource/raleway/700.css';
+/* Bold */
+@import '@fontsource/raleway/800.css';
+/* Extra Bold */
+
+@import 'animate.css';
+
+/* put custom classes here */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .flex-basis-125px {
+    flex-basis: 125px;
+  }
+
+  .flex-basis-30px {
+    flex-basis: 30px;
+  }
+}
+
+.container {
+  @apply mx-auto max-w-[392px] sm:max-w-[520px] md:max-w-[744px] lg:max-w-[960px] xl:max-w-[1180px] 2xl:max-w-[1320px] 3xl:max-w-[1512px] w-full;
+}
+
+.button-solid {
+  @apply px-4 py-3 font-semibold text-center text-white border-2 rounded-full bg-eco-sky-blue border-eco-sky-blue w-[250px] transition-colors hover:bg-eco-blue--light hover:border-eco-blue--light;
+
+  box-shadow: 4px 4px 4px 0px #00000040;
+}
+
+.button-outline {
+  @apply px-4 py-3 font-semibold text-center text-eco-sky-blue border-2 rounded-full bg-white border-eco-sky-blue w-[250px] transition-colors hover:border-eco-blue--light hover:text-eco-blue--light;
+
+  box-shadow: 4px 4px 4px 0px #00000040;
+}
