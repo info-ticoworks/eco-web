@@ -35,14 +35,14 @@ export async function POST(request: Request) {
 
   let mailOptions = {}
 
-  console.log({
-    from,
-    to,
-    cc,
-    SMTP_HOST,
-    SMTP_USER,
-    SMTP_PASS
-  })
+  // console.log({
+  //   from,
+  //   to,
+  //   cc,
+  //   SMTP_HOST,
+  //   SMTP_USER,
+  //   SMTP_PASS
+  // })
 
   // Configure the mail options based on whether the file was uploaded
   if (filename != null) {

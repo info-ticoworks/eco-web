@@ -23,7 +23,7 @@ const useFormContact = () => {
       formData.append('location', location)
       formData.append('message', message)
 
-      console.log('Datos: ', formData)
+      // console.log('Datos: ', formData)
 
       const response = await fetch('/api/mail', {
         method: 'POST',

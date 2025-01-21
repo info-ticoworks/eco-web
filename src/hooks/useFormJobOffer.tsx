@@ -39,7 +39,7 @@ const useFormJobOffer = () => {
         formData.append('file', file, file.name) // Append the file if present
       }
 
-      console.log('Datos: ', formData)
+      // console.log('Datos: ', formData)
 
       const response = await fetch('/api/mail', {
         method: 'POST',
