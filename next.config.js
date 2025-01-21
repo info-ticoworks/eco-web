@@ -3,9 +3,6 @@
 const withSVG = require('@svgr/webpack')
 
 const nextConfig = {
-  experimental: {
-    appDir: true
-  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
