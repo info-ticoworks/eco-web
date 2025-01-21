@@ -1,52 +1,53 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react'
 
 const useFormContact = () => {
-  const [loading, setLoading] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [location, setLocation] = useState('');
-  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false)
+  const [showError, setShowError] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+  const [location, setLocation] = useState('')
+  const [message, setMessage] = useState('')
 
   const handleForm = async (e: FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      setLoading(true);
-      const formData = {
-        name,
-        phone,
-        email,
-        location,
-        message
-      };
-      console.log('prueba: ', formData);
+      setLoading(true)
+
+      const formData = new FormData()
+      formData.append('name', name)
+      formData.append('email', email)
+      formData.append('phone', phone)
+      formData.append('location', location)
+      formData.append('message', message)
+
+      console.log('Datos: ', formData)
 
       const response = await fetch('/api/mail', {
         method: 'POST',
-        body: JSON.stringify(formData)
-      });
+        body: formData
+      })
 
       if (!response.ok) {
-        throw new Error('No se pudo enviar el mensaje');
+        throw new Error('No se pudo enviar el mensaje')
       }
-      const result = await response.json();
-      console.log('response: ', result);
+      const result = await response.json()
+      console.log('response: ', result)
 
-      const form = document.getElementById('contact-form') as HTMLFormElement;
+      const form = document.getElementById('contact-form') as HTMLFormElement
       if (form != null) {
-        setShowError(false);
-        setShowSuccess(true);
-        form.reset();
+        setShowError(false)
+        setShowSuccess(true)
+        form.reset()
       }
     } catch (error) {
-      setShowError(true);
+      setShowError(true)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return {
     handleForm,
@@ -59,8 +60,8 @@ const useFormContact = () => {
     setShowError,
     showSuccess,
     setShowSuccess,
-    loading,
-  };
-};
+    loading
+  }
+}
 
-export default useFormContact;
+export default useFormContact

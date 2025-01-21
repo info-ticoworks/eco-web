@@ -1,59 +1,61 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import nodemailer from 'nodemailer';
-import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer'
+import { NextResponse } from 'next/server'
 
-const from = process.env.FROM_EMAIL ?? '';
-const to = process.env.TO_EMAIL ?? '';
-const toCV = process.env.TO_EMAIL_CV ?? '';
-const SMTP_HOST = process.env.SMTP_HOST ?? '';
-const SMTP_USER = process.env.SMTP_USER ?? '';
-const SMTP_PASS = process.env.SMTP_PASS ?? '';
+const from = process.env.FROM_EMAIL ?? ''
+const to = process.env.TO_EMAIL ?? ''
+const cc = process.env.CC_EMAIL ?? ''
+const SMTP_HOST = process.env.SMTP_HOST ?? ''
+const SMTP_USER = process.env.SMTP_USER ?? ''
+const SMTP_PASS = process.env.SMTP_PASS ?? ''
 
 export async function POST(request: Request) {
   // Parse the form data manually
-  const formData = await request.formData();
-  const name = formData.get('name') as string;
-  const email = formData.get('email') as string;
-  const phone = formData.get('phone') as string;
-  const message = formData.get('message') as string;
-  const file = formData.get('file') as File;
+  const formData = await request.formData()
+  const name = formData.get('name') as string
+  const email = formData.get('email') as string
+  const phone = formData.get('phone') as string
+  const location = formData.get('location') as string
+  const message = formData.get('message') as string
+  const file = formData.get('file') as File
   // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  const filename = file ? file.name : null;
+  const filename = file ? file.name : null
 
   // Create the transporter for Nodemailer
   const transporter = nodemailer.createTransport({
     host: SMTP_HOST,
-    port: 587,
+    port: 2525,
     secure: false,
     auth: {
       user: SMTP_USER,
-      pass: SMTP_PASS,
+      pass: SMTP_PASS
     },
-    tls: {
-      ciphers: 'SSLv3',
-    },
-    debug: true,
-  });
+    debug: true
+  })
 
-  let mailOptions = {};
+  let mailOptions = {}
 
   console.log({
+    from,
+    to,
+    cc,
     SMTP_HOST,
     SMTP_USER,
-    SMTP_PASS,
-  });
+    SMTP_PASS
+  })
 
   // Configure the mail options based on whether the file was uploaded
   if (filename != null) {
-    console.log('sending cv...');
+    console.log('sending cv...')
 
     // Read the file content as a Buffer
-    const fileContent = Buffer.from(await file.arrayBuffer());
+    const fileContent = Buffer.from(await file.arrayBuffer())
 
     mailOptions = {
       from: `Ecokhemia <${from}>`,
-      to: toCV,
-      subject: `CV ${name}`,
+      to,
+      cc,
+      subject: `CV | ${name}`,
       html: `
       <div>
         <h3>
@@ -68,15 +70,16 @@ export async function POST(request: Request) {
       attachments: [
         {
           filename,
-          content: fileContent,
-        },
-      ],
-    };
+          content: fileContent
+        }
+      ]
+    }
   } else {
-    console.log('sending contact form...');
+    console.log('sending contact form...')
     mailOptions = {
       from: `Ecokhemia <${from}>`,
       to,
+      cc,
       subject: `Contacto | ${name}`,
       html: `
       <div>
@@ -88,19 +91,26 @@ export async function POST(request: Request) {
         <h3>Datos de contacto</h3>
         <p>Teléfono: ${phone}</p>
         <p>Email: ${email}</p>
+        <p>Lugar adonde se realizaría el trabajo: ${location}</p>
         <h3>Mensaje:</h3>
         <p>${message}</p>
       </div>
-      `,
-    };
+      `
+    }
   }
 
   try {
-    await transporter.sendMail(mailOptions);
-    console.log('Correo enviado!');
-    return NextResponse.json({ message: 'Mensaje enviado con éxito' }, { status: 200 });
+    await transporter.sendMail(mailOptions)
+    console.log('Correo enviado!')
+    return NextResponse.json(
+      { message: 'Mensaje enviado con éxito' },
+      { status: 200 }
+    )
   } catch (error) {
-    console.log('Error al enviar mail: ', error);
-    return NextResponse.json({ error: 'Failed to send email.' }, { status: 500 });
+    console.log('Error al enviar mail: ', error)
+    return NextResponse.json(
+      { error: 'Failed to send email.' },
+      { status: 500 }
+    )
   }
 }
