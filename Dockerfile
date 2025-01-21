@@ -9,7 +9,6 @@ WORKDIR /app
 RUN apk update
 RUN apk add npm
 RUN apk add nodejs-current
-RUN apk add nextjs-current
 COPY ./ ./
 RUN chmod -R 777 /app/
 RUN npm i -g nodemon
