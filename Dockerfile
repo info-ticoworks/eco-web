@@ -8,7 +8,8 @@ RUN apk add --no-cache \
 WORKDIR /app
 RUN apk update
 RUN apk add npm
-RUN apk add nodejs-current
+RUN apk add nodejs 18.14.2
+RUN apk add nextjs 13.2.3
 COPY ./ ./
 RUN chmod -R 777 /app/
 RUN npm i -g nodemon
