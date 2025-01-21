@@ -1,13 +1,17 @@
-FROM node:18-alpine
+FROM alpine
+
+# Installs latest packages.
+RUN apk add --no-cache \
+      nodejs \
+      yarn
 
 WORKDIR /app
-
-COPY package*.json ./
-
+RUN apk update
+RUN apk add npm
+RUN apk add nodejs-current
+COPY ./ ./
+RUN chmod -R 777 /src/
+RUN npm i -g nodemon
+RUN npm i -g ts-node
 RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-
-CMD [ "npm", "run", "dev" ]
+CMD ["npm","run","dev"]
