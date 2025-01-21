@@ -5,5 +5,5 @@ export const DEFAULT_APP_CONTEXT_VALUES: AppContextValues = {
   setNavbarStatus: () => {}
 }
 
-export const API_URL = ''
-export const SITE_URL = ''
+export const API_URL = 'https://admin.ecokhemia.com/api'
+export const SITE_URL = 'https://ecokhemia.com'

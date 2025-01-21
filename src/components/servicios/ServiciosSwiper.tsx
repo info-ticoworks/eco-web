@@ -37,7 +37,7 @@ interface Props {
   images: ImageFromAPI[]
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://admin.ecokhemia.com'
 const imagePath = (url: string) => `${API_URL}${url}`
 
 export default function ServiciosSwiper(props: Props) {
